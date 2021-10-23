@@ -45,7 +45,7 @@ const config: NuxtConfig = {
   target: 'static',
 
   // Disable Server Side rendering
-  ssr: false,
+  // ssr: false,
 
   // Inline server bundle dependencies
   standalone: true,
@@ -101,6 +101,7 @@ const config: NuxtConfig = {
   ** Plugins to load before mounting the App.
   */
   plugins: [
+    { src: '~/plugins/qiskit-components.ts', mode: 'client' },
     '~/plugins/router-hooks.ts',
     '~/plugins/carbon.ts',
     '~/plugins/deep-load.ts',
