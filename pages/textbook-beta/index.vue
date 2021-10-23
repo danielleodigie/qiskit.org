@@ -1,7 +1,7 @@
 <template>
   <main class="textbook-beta-page">
-    <QiskitBanner padding-x-none>
-      <div class="bx--grid">
+    <qiskit-banner style="padding-left: 0; padding-right: 0;">
+      <div class="bx--grid" style="width: 100%;">
         Miss the old version of the textbook? Access it
         <AppLink
           :segment="{ action: `${routeName} > banner > old-textbook-version` }"
@@ -10,7 +10,7 @@
           here
         </AppLink>
       </div>
-    </QiskitBanner>
+    </qiskit-banner>
     <TextbookBetaHeader />
     <StartLearningSection class="textbook-beta-page__section" />
     <AppHelpfulResourcesSection
@@ -22,10 +22,10 @@
 
 <script lang="ts">
 import { Component } from 'vue-property-decorator'
-import QiskitBanner from '@qiskit-community/qiskit-vue/src/components/banner/Banner.vue'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
+import '@qiskit/banner'
 
 @Component({
   layout: 'default-max',
@@ -33,8 +33,7 @@ import { SOCIAL_MEDIA } from '~/constants/menuLinks'
     return {
       title: 'Qiskit Textbook'
     }
-  },
-  components: { QiskitBanner }
+  }
 })
 export default class TextbookBetaPage extends QiskitPage {
   routeName: string = 'textbook-beta'

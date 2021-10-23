@@ -44,6 +44,12 @@ md.use(miAnchor, {
 const config: NuxtConfig = {
   target: 'static',
 
+  // Disable Server Side rendering
+  ssr: false,
+
+  // Inline server bundle dependencies
+  standalone: true,
+
   env: {
     analyticsScriptUrl: IS_PRODUCTION
       ? 'https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js'
