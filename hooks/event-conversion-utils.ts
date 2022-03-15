@@ -40,13 +40,13 @@ const RECORD_FIELDS = Object.freeze({
   speaker: 'Speaker (S.S.)'
 } as const)
 
-function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = []): Airtable.Query<{}> {
-  const { startDate } = RECORD_FIELDS
+function getEventsQuery (apiKey: string, days: number, view: string, filters: string[] = [], firstEventDay: string, lastEventDay: any): Airtable.Query<{}> {
+  // const { startDate } = RECORD_FIELDS
   const base = new Airtable({ apiKey }).base('appYREKB18uC7y8ul')
 
   const formulaFilters = [
-    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
-    `DATETIME_DIFF({${startDate}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
+    `DATETIME_DIFF({${lastEventDay || firstEventDay}}, TODAY(), 'days') ${days > 0 ? '<=' : '>='} ${days}`,
+    `DATETIME_DIFF({${lastEventDay || firstEventDay}}, TODAY(), 'days') ${days > 0 ? '>=' : '<'} 0`,
     ...filters
   ]
 
@@ -54,16 +54,16 @@ function getEventsQuery (apiKey: string, days: number, view: string, filters: st
 
   return base('Event Calendar').select({
     filterByFormula,
-    sort: [{ field: startDate, direction: days > 0 ? 'asc' : 'desc' }],
+    sort: [{ field: firstEventDay, direction: days > 0 ? 'asc' : 'desc' }],
     view
   })
 }
 
 async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): Promise<CommunityEvent[]> {
-  const { showOnEventsPage } = RECORD_FIELDS
+  const { showOnEventsPage, startDate, endDate } = RECORD_FIELDS
   const communityEvents: CommunityEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Add to Event Site', [`{${showOnEventsPage}}`], startDate, endDate).eachPage((records, nextPage) => {
     for (const record of records) {
       const communityEvent = convertToCommunityEvent(record)
       communityEvents.push(communityEvent)
@@ -75,10 +75,10 @@ async function fetchCommunityEvents (apiKey: string, { days }: { days: any }): P
 }
 
 async function fetchSeminarSeriesEvents (apiKey: string, { days }: { days: any }): Promise<SeminarSeriesEvent[]> {
-  const { showOnSeminarSeriesPage } = RECORD_FIELDS
+  const { showOnSeminarSeriesPage, startDate } = RECORD_FIELDS
   const seminarSeriesEvents: SeminarSeriesEvent[] = []
 
-  await getEventsQuery(apiKey, days, 'Seminar Series ONLY', [`{${showOnSeminarSeriesPage}}`]).eachPage((records, nextPage) => {
+  await getEventsQuery(apiKey, days, 'Seminar Series ONLY', [`{${showOnSeminarSeriesPage}}`], startDate, undefined).eachPage((records, nextPage) => {
     for (const record of records) {
       const seminarSeriesEvent = convertToSeminarSeriesEvent(record)
 
