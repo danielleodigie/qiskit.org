@@ -25,6 +25,7 @@ import { Component } from 'vue-property-decorator'
 import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
+import '@qiskit/web-components/components/banner'
 
 @Component({
   layout: 'default-max',
