@@ -174,6 +174,10 @@ const config: NuxtConfig = {
           }
         }
       })
+      config.module.rules.push({
+        test: /\.js$/,
+        loader: require.resolve('@open-wc/webpack-import-meta-loader')
+      })
     },
 
     // TODO: Workaround for dealing with. Remove once its solved:

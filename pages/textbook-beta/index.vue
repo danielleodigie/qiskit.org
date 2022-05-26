@@ -11,6 +11,9 @@
         </AppLink>
       </div>
     </qiskit-banner>
+    <qiskit-mega-menu-dropdown>
+      hola
+    </qiskit-mega-menu-dropdown>
     <TextbookBetaHeader />
     <StartLearningSection class="textbook-beta-page__section" />
     <AppHelpfulResourcesSection
@@ -26,6 +29,7 @@ import QiskitPage from '~/components/logic/QiskitPage.vue'
 import { DescriptionCard } from '~/components/ui/AppDescriptionCard.vue'
 import { SOCIAL_MEDIA } from '~/constants/menuLinks'
 import '@qiskit/web-components/components/banner'
+import '@qiskit/web-components/components/mega-menu-dropdown'
 
 @Component({
   layout: 'default-max',

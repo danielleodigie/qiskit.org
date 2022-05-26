@@ -52,6 +52,7 @@
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/stylelint-module": "^4.0.0",
+    "@open-wc/webpack-import-meta-loader": "^0.4.7",
     "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.172",
     "@types/markdown-it": "^12.2.0",
