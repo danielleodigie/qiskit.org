@@ -1,1 +1,1 @@
-import '@qiskit/banner'
+import '@qiskit/web-components/components/banner'
